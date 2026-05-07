@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { allPages, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, quoteUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
+import { allPages, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
 
 function t(locale: Locale, es: string, en: string) {
   return locale === "en" ? en : es;
@@ -289,8 +289,78 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
         <div className="cta-actions">
           <a className="button button-dark" href={whatsappUrl(pageMessage(selectedPage, locale))}>{t(locale, "WhatsApp", "WhatsApp")}</a>
           <a className="button button-outline" href={bookingUrl}>{t(locale, "Booking", "Booking")}</a>
-          <a className="button button-outline" href={quoteUrl}>{t(locale, "Formulario", "Form")}</a>
+          <a className="button button-outline" href="#formulario">{t(locale, "Formulario", "Form")}</a>
           <a className="button button-outline" href={`tel:+${phoneE164}`}>{phone}</a>
+        </div>
+      </section>
+
+      <section className="section" id="formulario">
+        <div className="wrap contact-form-wrap">
+          <div>
+            <p className="section-tag">{t(locale, "Formulario", "Form")}</p>
+            <h2>{t(locale, "Enviar detalles del proyecto", "Send project details")}</h2>
+            <p>
+              {t(
+                locale,
+                "El formulario prepara un email dirigido a info@babulashotsrd.com con los datos del vuelo. Incluye ubicacion, fecha y entregables para responder con precio y disponibilidad.",
+                "The form prepares an email to info@babulashotsrd.com with the flight details. Include location, date and deliverables so we can reply with price and availability."
+              )}
+            </p>
+          </div>
+          <form
+            className="contact-form"
+            action="mailto:info@babulashotsrd.com?subject=Drone%20quote%20request%20-%20Babula%20Shots"
+            method="post"
+            encType="text/plain"
+          >
+            <label>
+              {t(locale, "Nombre", "Name")}
+              <input name={t(locale, "Nombre", "Name")} type="text" autoComplete="name" required />
+            </label>
+            <label>
+              WhatsApp
+              <input name="WhatsApp" type="tel" autoComplete="tel" required />
+            </label>
+            <label>
+              Email
+              <input name="Email" type="email" autoComplete="email" required />
+            </label>
+            <label>
+              {t(locale, "Ciudad / zona", "City / area")}
+              <input name={t(locale, "Ciudad o zona", "City or area")} type="text" autoComplete="address-level2" required />
+            </label>
+            <label>
+              {t(locale, "Fecha deseada", "Desired date")}
+              <input name={t(locale, "Fecha deseada", "Desired date")} type="date" />
+            </label>
+            <label>
+              {t(locale, "Servicio", "Service")}
+              <select name={t(locale, "Servicio", "Service")} defaultValue={title}>
+                <option>{title}</option>
+                <option>{t(locale, "Foto drone inmobiliaria", "Real estate drone photo")}</option>
+                <option>{t(locale, "Video drone 4K", "4K drone video")}</option>
+                <option>{t(locale, "Inspeccion visual", "Visual inspection")}</option>
+                <option>{t(locale, "Construccion / obra", "Construction / worksite")}</option>
+                <option>{t(locale, "Cotizacion custom", "Custom quote")}</option>
+              </select>
+            </label>
+            <label className="full-field">
+              {t(locale, "Mensaje", "Message")}
+              <textarea
+                name={t(locale, "Mensaje", "Message")}
+                rows={6}
+                required
+                defaultValue={t(
+                  locale,
+                  `Hola, necesito cotizar ${title}. Ubicacion: . Entregables: . Altura aproximada: .`,
+                  `Hello, I need a quote for ${title}. Location: . Deliverables: . Approximate height: .`
+                )}
+              />
+            </label>
+            <button className="button button-dark full-field" type="submit">
+              {t(locale, "Enviar email a info@babulashotsrd.com", "Send email to info@babulashotsrd.com")}
+            </button>
+          </form>
         </div>
       </section>
     </main>

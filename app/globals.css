@@ -242,6 +242,41 @@ summary { cursor: pointer; font-weight: 800; }
 .conversion-panel .section-tag { color: #e2ffe3; }
 .conversion-panel .button-outline { color: white; }
 
+.contact-form-wrap {
+  display: grid;
+  grid-template-columns: .9fr 1.4fr;
+  gap: clamp(28px, 6vw, 72px);
+  align-items: start;
+}
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 800;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+.contact-form textarea { resize: vertical; }
+.full-field { grid-column: 1 / -1; }
+
 .site-footer {
   border-top: 1px solid var(--line);
   background: var(--surface);
@@ -258,7 +293,7 @@ summary { cursor: pointer; font-weight: 800; }
 
 @media (max-width: 900px) {
   .site-header { align-items: flex-start; flex-direction: column; }
-  .split, .two-cols, .card-grid, .gallery-grid, .conversion-panel, .footer-grid { grid-template-columns: 1fr; }
+  .split, .two-cols, .card-grid, .gallery-grid, .conversion-panel, .contact-form-wrap, .contact-form, .footer-grid { grid-template-columns: 1fr; }
   .pricing-row { grid-template-columns: 1fr; }
   .pricing-head { display: none; }
 }
