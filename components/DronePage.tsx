@@ -16,6 +16,37 @@ function pageMessage(page: DronePageData, locale: Locale) {
   return `Hola, vengo de la web de Babula Shots Drone. Necesito cotizar ${page.h1}. La ubicacion es:`;
 }
 
+function typeLabel(type: DronePageData["type"], isEnglish: boolean) {
+  if (type === "city") return isEnglish ? "Cities" : "Ciudades";
+  if (type === "service") return isEnglish ? "Services" : "Servicios";
+  if (type === "guide") return isEnglish ? "Guides" : "Guias";
+  if (type === "pricing") return isEnglish ? "Prices" : "Precios";
+  return isEnglish ? "Drone" : "Drone";
+}
+
+function buildBreadcrumb(
+  isEnglish: boolean,
+  home: boolean,
+  page: DronePageData,
+  title: string,
+  pageUrl: string
+) {
+  const homeLabel = isEnglish ? "Home" : "Inicio";
+  const droneHomeUrl = canonicalUrl(isEnglish ? "/en/" : "/");
+  if (home) {
+    return [
+      { "@type": "ListItem", position: 1, name: homeLabel, item: mainBrandUrl },
+      { "@type": "ListItem", position: 2, name: "Drone", item: droneHomeUrl }
+    ];
+  }
+  const middleLabel = typeLabel(page.type, isEnglish);
+  return [
+    { "@type": "ListItem", position: 1, name: homeLabel, item: mainBrandUrl },
+    { "@type": "ListItem", position: 2, name: middleLabel, item: droneHomeUrl },
+    { "@type": "ListItem", position: 3, name: title, item: pageUrl }
+  ];
+}
+
 function citySchema(page: DronePageData) {
   if (!page.area) return { "@type": "Country", name: "Dominican Republic" };
   return {
@@ -89,10 +120,7 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
       inLanguage: isEnglish ? "en" : "es-DO",
       breadcrumb: {
         "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Babula Shots Drone", item: canonicalUrl(isEnglish ? "/en/" : "/") },
-          { "@type": "ListItem", position: 2, name: title, item: pageUrl }
-        ]
+        itemListElement: buildBreadcrumb(isEnglish, home, selectedPage, title, pageUrl)
       }
     },
     { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq }
@@ -159,9 +187,18 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
             ["/images/drone/drone-inmobiliario-republica-dominicana.webp", t(locale, "Dron inmobiliario en Republica Dominicana", "Real estate drone in Dominican Republic")],
             ["/images/drone/drone-arquitectura-inspeccion.webp", t(locale, "Dron para arquitectura e inspeccion visual", "Drone for architecture and visual inspection")],
             ["/images/drone/piloto-dron-republica-dominicana.webp", t(locale, "Piloto de dron profesional en RD", "Professional drone pilot in DR")]
-          ].map(([src, alt]) => (
+          ].map(([src, alt], index) => (
             <figure key={src}>
-              <Image src={src} alt={alt} width={1320} height={741} sizes="(max-width: 760px) 100vw, 50vw" />
+              <Image
+                src={src}
+                alt={alt}
+                width={1320}
+                height={741}
+                sizes="(max-width: 760px) 100vw, 50vw"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : undefined}
+                decoding="async"
+              />
               <figcaption>{alt}</figcaption>
             </figure>
           ))}

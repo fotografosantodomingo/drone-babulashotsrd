@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && node scripts/inline-css.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "social-card": "node scripts/social-card.mjs"
   },
   "dependencies": {
     "next": "^16.2.4",

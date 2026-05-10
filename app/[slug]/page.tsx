@@ -17,9 +17,23 @@ export async function generateMetadata({ params }: PageProps) {
     description: page.description,
     alternates: {
       canonical: canonicalUrl(pathFor(page)),
-      languages: { "es-DO": canonicalUrl(pathFor(page)), en: canonicalUrl(pathFor(page, "en")) }
+      languages: {
+        "es-DO": canonicalUrl(pathFor(page)),
+        es: canonicalUrl(pathFor(page)),
+        en: canonicalUrl(pathFor(page, "en"))
+      }
     },
-    openGraph: { title: page.title, description: page.description, url: canonicalUrl(pathFor(page)) }
+    openGraph: {
+      title: page.title,
+      description: page.description,
+      url: canonicalUrl(pathFor(page)),
+      siteName: "Babula Shots Drone",
+      locale: "es_DO",
+      type: "website",
+      images: [
+        { url: "/images/drone/social-card-1200x630.webp", width: 1200, height: 630, alt: "Babula Shots Drone" }
+      ]
+    }
   };
 }
 

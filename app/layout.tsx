@@ -19,7 +19,26 @@ export const metadata: Metadata = {
   title: { default: "Servicio de dron en Republica Dominicana | Babula Shots", template: "%s" },
   description:
     "Foto, video e inspecciones con dron para inmobiliaria, arquitectura, construccion, industria, agricultura y turismo en RD.",
-  openGraph: { siteName: "Babula Shots Drone", locale: "es_DO", type: "website" },
+  openGraph: {
+    siteName: "Babula Shots Drone",
+    locale: "es_DO",
+    type: "website",
+    images: [
+      {
+        url: "/images/drone/social-card-1200x630.webp",
+        width: 1200,
+        height: 630,
+        alt: "Babula Shots Drone"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Servicio de dron en Republica Dominicana | Babula Shots",
+    description:
+      "Foto, video e inspecciones con dron para inmobiliaria, arquitectura, construccion, industria, agricultura y turismo en RD.",
+    images: ["/images/drone/social-card-1200x630.webp"]
+  },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   icons: { icon: "/images/cropped-babulashotslogo-1.png", apple: "/images/cropped-babulashotslogo-1.png" }
 };
