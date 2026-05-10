@@ -20,7 +20,7 @@ export function CrossSiteCta({ locale = "es" }: { locale?: "es" | "en" }) {
             </p>
           </div>
           <div className="cross-site-actions">
-            <a className="button button-dark" href={bodaUrl} rel="noopener">
+            <a className="button button-dark" href={`${bodaUrl}/${isEnglish ? "en/" : ""}servicios/`} rel="noopener">
               {isEnglish ? "See wedding services" : "Ver servicios de bodas"}
             </a>
           </div>
