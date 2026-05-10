@@ -29,7 +29,7 @@ export type DronePage = {
   priority?: number;
 };
 
-export const siteUrl = "https://drone.babulashotsrd.com";
+export const siteUrl = "https://dron.babulashotsrd.com";
 export const phone = "809 720 95 47";
 export const phoneE164 = "18097209547";
 export const bookingUrl = "https://dronebabulashots.setmore.com";
