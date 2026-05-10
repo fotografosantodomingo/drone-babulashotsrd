@@ -5,6 +5,7 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const paths = ["/", "/en/", ...allPages.flatMap((page) => [pathFor(page), pathFor(page, "en")])];
+  const sharedPaths = ["/servicios/", "/en/servicios/", "/ubicaciones/", "/en/ubicaciones/", "/precios/", "/en/precios/", "/faq/", "/en/faq/"];
+  const paths = ["/", "/en/", ...sharedPaths, ...allPages.flatMap((page) => [pathFor(page), pathFor(page, "en")])];
   return paths.map((path) => ({ url: canonicalUrl(path), lastModified }));
 }
