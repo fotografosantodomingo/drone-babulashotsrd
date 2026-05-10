@@ -1,30 +1,83 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { allPages, pathFor } from "@/lib/droneData";
 import { ThemeLanguageControls } from "@/components/ThemeLanguageControls";
+import { bodaUrl, inmobiliariaUrl, mainBrandUrl, niche, siteUrl } from "@/lib/droneData";
+
+const navItems: Array<{ label: string; href: string; current?: boolean; external?: boolean }> = [
+  { label: "Home", href: mainBrandUrl, external: true },
+  { label: "Bodas", href: bodaUrl, external: true },
+  { label: "Inmobiliaria", href: inmobiliariaUrl, external: true },
+  { label: "Drone", href: siteUrl + "/", current: true },
+  { label: "Contacto", href: "#contacto" }
+];
 
 export function SiteHeader() {
-  const pathname = usePathname() || "/";
-  const isEnglish = pathname === "/en" || pathname.startsWith("/en/");
-  const mainService = allPages.find((page) => page.slug === "dron-inmobiliario-arquitectura")!;
-  const prices = allPages.find((page) => page.slug === "precios-servicio-dron-republica-dominicana")!;
-  const construction = allPages.find((page) => page.slug === "dron-construccion-ingenieria")!;
-
   return (
-    <header className="site-header">
-      <Link className="brand" href={isEnglish ? "/en/" : "/"} aria-label="Babula Shots Drone">
-        Babula Shots <span>Drone</span>
-      </Link>
+    <header className="site-header" data-drawer-host>
+      <div className="header-row">
+        <ThemeLanguageControls />
+        <Link className="brand" href="/" aria-label={`Babula Shots ${niche.label}`}>
+          <span className="brand-niche">{niche.label}</span>
+          <span className="brand-tag">By Babula Shots</span>
+        </Link>
+        <button
+          type="button"
+          className="hamburger"
+          aria-label="Abrir menu"
+          aria-controls="site-drawer"
+          aria-expanded="false"
+          data-drawer-toggle
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+      </div>
       <nav className="site-nav" aria-label="Main navigation">
-        <Link href={pathFor(mainService, isEnglish ? "en" : "es")}>{isEnglish ? "Real Estate" : "Inmobiliaria"}</Link>
-        <Link href={pathFor(construction, isEnglish ? "en" : "es")}>{isEnglish ? "Construction" : "Construccion"}</Link>
-        <Link href={isEnglish ? "/en/drone-santo-domingo/" : "/dron-santo-domingo/"}>Santo Domingo</Link>
-        <Link href={isEnglish ? "/en/drone-punta-cana/" : "/dron-punta-cana/"}>Punta Cana</Link>
-        <Link href={pathFor(prices, isEnglish ? "en" : "es")}>{isEnglish ? "Prices" : "Precios"}</Link>
+        {navItems.map((item) => (
+          <a
+            key={item.label}
+            className={`site-nav-link${item.current ? " is-current" : ""}`}
+            href={item.href}
+            aria-current={item.current ? "page" : undefined}
+            {...(item.external ? { rel: "noopener" } : {})}
+          >
+            {item.label}
+          </a>
+        ))}
       </nav>
-      <ThemeLanguageControls />
+      <div className="site-drawer" id="site-drawer" data-drawer hidden>
+        <div className="site-drawer-backdrop" data-drawer-close aria-hidden="true" />
+        <aside className="site-drawer-panel" role="dialog" aria-modal="true" aria-label="Menu">
+          <div className="site-drawer-header">
+            <span className="brand">
+              <span className="brand-niche">{niche.label}</span>
+              <span className="brand-tag">By Babula Shots</span>
+            </span>
+            <button type="button" className="drawer-close" aria-label="Cerrar menu" data-drawer-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <nav className="site-drawer-nav" aria-label="Site navigation">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                className={`site-drawer-link${item.current ? " is-current" : ""}`}
+                href={item.href}
+                aria-current={item.current ? "page" : undefined}
+                {...(item.external ? { rel: "noopener" } : {})}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div className="site-drawer-footer">
+            <p className="brand-tag">Premium photography agency</p>
+            <a className="drawer-secondary" href="https://www.fotografosantodomingo.com" rel="noopener">
+              fotografosantodomingo.com
+            </a>
+          </div>
+        </aside>
+      </div>
     </header>
   );
 }

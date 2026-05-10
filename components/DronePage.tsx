@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CrossSiteCta } from "@/components/CrossSiteCta";
+import { HeroImage } from "@/components/HeroImage";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
 import { allPages, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
 
@@ -103,7 +105,7 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
     <main>
       <SeoJsonLd data={schema} />
       <section className="drone-hero">
-        <Image src={selectedPage.image} alt={title} width={1320} height={741} priority fetchPriority="high" className="hero-image" />
+        <HeroImage src={selectedPage.image} alt={title} />
         <div className="hero-content">
           <p className="eyebrow">Babula Shots Drone · {t(locale, "Pilotos con licencia", "Licensed pilots")}</p>
           <h1>{title}</h1>
@@ -279,6 +281,8 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
           </div>
         </section>
       ) : null}
+
+      <CrossSiteCta locale={locale} />
 
       <section className="conversion-panel" id="contacto">
         <div>

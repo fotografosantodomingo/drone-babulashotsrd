@@ -35,8 +35,17 @@ export const phoneE164 = "18097209547";
 export const bookingUrl = "https://dronebabulashots.setmore.com";
 export const quoteUrl = "https://babulashotsrd.com/";
 export const pricingSourceUrl = "https://www.fotografosantodomingo.com/es/services/real-estate-drone-photography";
-export const mainBrandUrl = "https://babulashotsrd.com/";
-export const inmobiliariaUrl = "https://inmobiliaria.babulashotsrd.com/";
+export const mainBrandUrl = "https://babulashotsrd.com";
+export const bodaUrl = "https://boda.babulashotsrd.com";
+export const inmobiliariaUrl = "https://inmobiliaria.babulashotsrd.com";
+export const droneUrl = siteUrl;
+export const santoDomingoHubUrl = "https://www.fotografosantodomingo.com";
+export const email = "info@babulashotsrd.com";
+export const niche = {
+  label: "Drone",
+  enLabel: "Drone",
+  whatsappContext: "Hola, vengo de la web de Drone Babula Shots."
+};
 
 export const dronePackages = [
   {

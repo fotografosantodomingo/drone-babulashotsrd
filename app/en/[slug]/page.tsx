@@ -2,12 +2,15 @@ import { notFound } from "next/navigation";
 import { DroneLandingPage } from "@/components/DronePage";
 import { allPages, canonicalUrl, findPage, pathFor } from "@/lib/droneData";
 
+type PageProps = { params: Promise<{ slug: string }> };
+
 export function generateStaticParams() {
   return allPages.map((page) => ({ slug: page.enSlug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const page = findPage(params.slug, "en");
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const page = findPage(slug, "en");
   if (!page) return {};
   return {
     title: page.enTitle,
@@ -20,8 +23,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const page = findPage(params.slug, "en");
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const page = findPage(slug, "en");
   if (!page) notFound();
   return <DroneLandingPage page={page} locale="en" />;
 }
