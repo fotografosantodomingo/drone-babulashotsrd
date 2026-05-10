@@ -10,9 +10,9 @@ const normalizePath = (pathname: string) => {
 
 const routePairs: LanguagePaths[] = [
   { es: "/", en: "/en/" },
-  { es: "/servicios/", en: "/en/servicios/" },
-  { es: "/ubicaciones/", en: "/en/ubicaciones/" },
-  { es: "/precios/", en: "/en/precios/" },
+  { es: "/servicios/", en: "/en/services/" },
+  { es: "/ubicaciones/", en: "/en/locations/" },
+  { es: "/precios/", en: "/en/prices/" },
   { es: "/faq/", en: "/en/faq/" },
   ...allPages.map((page) => ({ es: pathFor(page, "es"), en: pathFor(page, "en") }))
 ].map((pair) => ({ es: normalizePath(pair.es), en: normalizePath(pair.en) }));
