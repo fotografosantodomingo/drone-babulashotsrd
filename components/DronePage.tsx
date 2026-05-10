@@ -138,10 +138,6 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
           <p className="eyebrow">Babula Shots Drone · {t(locale, "Pilotos con licencia", "Licensed pilots")}</p>
           <h1>{title}</h1>
           <p>{intro}</p>
-          <div className="hero-actions">
-            <a className="button button-light" href={whatsappUrl(pageMessage(selectedPage, locale))}>{t(locale, "Cotizar por WhatsApp", "Quote on WhatsApp")}</a>
-            <a className="button button-ghost" href={bookingUrl}>{t(locale, "Reservar vuelo", "Book flight")}</a>
-          </div>
         </div>
       </section>
 
