@@ -27,6 +27,9 @@ export type DronePage = {
   area?: string;
   province?: string;
   priority?: number;
+  localContext?: string[];
+  enLocalContext?: string[];
+  sisterCities?: string[];
 };
 
 export const siteUrl = "https://dron.babulashotsrd.com";
@@ -285,6 +288,191 @@ const city = (slug: string, enSlug: string, name: string, province: string, angl
   province
 });
 
+const cityLocalContext: Record<string, { es: string[]; en: string[]; sisters: string[] }> = {
+  "dron-santo-domingo": {
+    es: [
+      "Santo Domingo se lee desde el aire como una capital de contrastes: el skyline contemporaneo de Anacaona, la Torre Caney y los nuevos proyectos verticales de Piantini se enmarcan contra el Malecon y el mar Caribe, mientras que apenas diez minutos al sur la Zona Colonial muestra desde altura el trazado original del Nuevo Mundo, con la Catedral Primada, la Plaza Espana, el Alcazar de Colon y el Faro a Colon proyectandose sobre el rio Ozama.",
+      "Para inmobiliaria capitalina priorizamos vuelos sobre torres en preventa, comparativas de altura entre pisos, orientacion del balcon hacia el Malecon o el parque Mirador Sur, y la relacion visual de la propiedad con avenidas clave como Winston Churchill, Lope de Vega o la Nunez de Caceres. En arquitectura, el dron registra cubiertas, terrazas, helipuertos y la verdadera densidad construida de la manzana.",
+      "Tecnicamente Santo Domingo exige planificacion: el aeropuerto Las Americas (SDQ) impone restricciones al sur-este, el Isabela (JBQ) afecta el norte de la ciudad, y muchos edificios oficiales requieren mantener distancia y altura controlada. La mejor ventana de luz suele ser entre 6:30-8:00 a.m. y 4:30-6:00 p.m., con cielo limpio entre diciembre y abril."
+    ],
+    en: [
+      "Santo Domingo reads from the air as a city of contrasts: the contemporary Anacaona skyline, Torre Caney and new vertical projects in Piantini framed against the Malecon and the Caribbean Sea, while ten minutes south the Zona Colonial reveals the original New World grid from above, with the Catedral Primada, Plaza Espana, Alcazar de Colon and the Faro a Colon monument projecting over the Ozama river.",
+      "For real estate in the capital we prioritize flights over pre-sale towers, height comparisons between floors, balcony orientation toward the Malecon or Mirador Sur park, and the visual relationship of the property with key avenues such as Winston Churchill, Lope de Vega and Nunez de Caceres. For architecture, drones record roofs, terraces, helipads and the real built density of the block.",
+      "Technically Santo Domingo requires planning: Las Americas airport (SDQ) creates restrictions to the south-east, Isabela (JBQ) affects the northern edge, and many government buildings require keeping distance and controlled altitude. The best light window is usually 6:30-8:00 a.m. and 4:30-6:00 p.m., with cleanest skies between December and April."
+    ],
+    sisters: ["dron-juan-dolio", "dron-santiago", "dron-la-romana"]
+  },
+  "dron-punta-cana": {
+    es: [
+      "Punta Cana se vende desde el aire mejor que desde la calle. El dron sintetiza en una sola toma la coreografia que define el destino: la franja de arena blanca que arranca en Cabeza de Toro y se extiende hacia Bavaro y Uvero Alto, el patron de palmeras de cocotero, las piscinas serpenteantes de Hard Rock, Iberostar, Bahia Principe y la silueta del complejo Cap Cana al sur con Eden Roc y Punta Espada como remates premium.",
+      "Para inversionistas y agentes inmobiliarios el dron sirve para responder la pregunta real: a que distancia exacta esta el lote, la villa o el condo de la playa, del campo de golf y de la salida hacia el aeropuerto. Capturamos las amenidades del proyecto, la franja costera de Juanillo Beach, marinas con yates anclados y la malla vial del Boulevard Turistico desde altura para contextualizar acceso y privacidad.",
+      "El aeropuerto Punta Cana (PUJ) genera una zona restringida amplia que cubre buena parte del corredor turistico; cualquier vuelo requiere planificacion previa, contacto con el resort y a veces autorizacion del concesionario. La hora dorada (6:00-7:30 a.m. y 5:00-6:30 p.m.) en temporada seca (Dic-Abr) entrega los colores turquesa caracteristicos del destino sin reflejos quemados."
+    ],
+    en: [
+      "Punta Cana sells better from the air than from the road. Drones synthesize in a single shot the choreography that defines the destination: the white sand strip starting at Cabeza de Toro and stretching to Bavaro and Uvero Alto, the coconut palm patterns, the serpentine pools of Hard Rock, Iberostar and Bahia Principe, and the Cap Cana complex to the south with Eden Roc and Punta Espada as premium markers.",
+      "For investors and real estate agents, drone footage answers the real question: how far exactly is the lot, villa or condo from the beach, the golf course and the airport exit. We capture project amenities, the coastal strip of Juanillo Beach, marinas with anchored yachts, and the Boulevard Turistico road network from altitude to contextualize access and privacy.",
+      "Punta Cana airport (PUJ) creates a wide restricted zone covering much of the tourism corridor; any flight requires prior planning, coordination with the resort and sometimes concession authorization. The golden hour (6:00-7:30 a.m. and 5:00-6:30 p.m.) during the dry season (Dec-Apr) delivers the destination's signature turquoise colors without blown-out highlights."
+    ],
+    sisters: ["dron-bavaro", "dron-cap-cana", "dron-bayahibe"]
+  },
+  "dron-bavaro": {
+    es: [
+      "Bavaro es la cara mas comercial de la franja oriental: hoteles all-inclusive amontonados sobre 8 km de arena, condominios de inversion en Cocotal y Cortecito, plazas comerciales y restaurantes pegados a la linea de playa. Desde el aire se ve con claridad la diferencia entre Arena Gorda con su densidad hotelera, Los Corales con su mezcla de villas y rentas turisticas, y El Cortecito como zona mas peatonal y caribena.",
+      "Para propietarios de Airbnb y administradores de condos, el dron muestra el activo real: la piscina del complejo, la distancia caminable a la playa, el acceso al beach club y la posicion respecto a los hoteles vecinos. Es la diferencia entre publicar un anuncio comodtity en Booking y un anuncio premium con vista aerea que justifica precio por noche superior.",
+      "Bavaro comparte la zona restringida del aeropuerto PUJ, por lo que la planificacion de vuelo debe contemplar altura maxima, distancia a la pista y horarios de operacion. La temporada baja de huracanes (Jun-Nov) limita ventanas; en temporada alta el cielo de las 7:00 a.m. con marea baja deja ver el patron de coral cerca de la orilla."
+    ],
+    en: [
+      "Bavaro is the most commercial face of the eastern coast: all-inclusive hotels packed along 8 km of sand, investor condos in Cocotal and Cortecito, shopping plazas and restaurants pressed against the beach line. From the air the difference is clear between Arena Gorda with its hotel density, Los Corales with its mix of villas and short-term rentals, and El Cortecito as the more walkable Caribbean zone.",
+      "For Airbnb owners and condo managers, drone footage shows the actual asset: the complex pool, walkable distance to the beach, beach club access and position relative to neighboring hotels. It is the difference between posting a commodity listing on Booking and a premium listing with aerial views that justifies a higher nightly rate.",
+      "Bavaro shares the PUJ airport restricted zone, so flight planning must consider maximum height, runway distance and operating hours. The hurricane season (Jun-Nov) limits windows; in high season a 7:00 a.m. sky at low tide reveals the coral patterns near the shore."
+    ],
+    sisters: ["dron-punta-cana", "dron-cap-cana", "dron-bayahibe"]
+  },
+  "dron-cap-cana": {
+    es: [
+      "Cap Cana es un caso aparte dentro del corredor de Punta Cana: una ciudadela cerrada de 120 km2 donde conviven villas de ultra-lujo, el Eden Roc a Cap Cana, la Marina con calado para mega-yates, Juanillo Beach y dos campos de Jack Nicklaus, Punta Espada y Las Iguanas. Desde el aire se aprecia el diseno de paisajismo, la separacion entre clusters residenciales y la relacion con la barrera de coral.",
+      "Para vender una villa en Cap Cana, el dron no solo muestra la propiedad: muestra que esta dentro de Cap Cana. Capturamos el acceso por el pueblo de control, la cercania al hoyo 17 firmado sobre el oceano, la marina con embarcaciones de 100 pies, y la distancia a Caleton Beach Club. Para arquitectos, el ortomosaico del lote justifica decisiones de orientacion y huella construida.",
+      "Las restricciones son mas estrictas que en Bavaro: ademas de la zona PUJ, la propia administracion de Cap Cana coordina permisos internos para vuelos comerciales. Trabajamos con autorizacion previa, ventanas en hora dorada y altura controlada para no afectar privacidad de huespedes. Diciembre a marzo es la temporada visual ideal."
+    ],
+    en: [
+      "Cap Cana is a special case within the Punta Cana corridor: a 120 km2 gated city where ultra-luxury villas, Eden Roc a Cap Cana, the deep-draft mega-yacht Marina, Juanillo Beach and two Jack Nicklaus courses (Punta Espada and Las Iguanas) coexist. From the air the landscape design, separation between residential clusters and relationship with the coral barrier are evident.",
+      "To sell a Cap Cana villa, drone footage does more than show the property: it proves it is inside Cap Cana. We capture the gatehouse entry, proximity to the signature 17th hole over the ocean, the marina with 100-foot vessels, and distance to Caleton Beach Club. For architects, a lot orthomosaic justifies orientation and built footprint decisions.",
+      "Restrictions are stricter than in Bavaro: beyond the PUJ zone, Cap Cana administration coordinates internal permits for commercial flights. We work with prior authorization, golden-hour windows and controlled altitude to protect guest privacy. December to March is the ideal visual season."
+    ],
+    sisters: ["dron-punta-cana", "dron-bavaro", "dron-bayahibe"]
+  },
+  "dron-casa-de-campo": {
+    es: [
+      "Casa de Campo es probablemente el resort residencial mas iconico del Caribe, y su composicion aerea es unica: 7,000 acres con el campo Teeth of the Dog disenado por Pete Dye serpenteando sobre el mar, Altos de Chavon como replica de pueblo mediterraneo del siglo XVI sobre un acantilado del rio Chavon, una marina con cientos de embarcaciones y campos de polo activos.",
+      "Para propietarios de villa el dron no muestra una casa, muestra una direccion dentro de Casa de Campo. Capturamos la cercania al green del hoyo 7 de Teeth of the Dog, la vista hacia la marina, la distancia a la playa Minitas o Caleton, la disposicion de los jardines, piscina infinita y la relacion con villas vecinas. Para Altos de Chavon, los planos cenitales del anfiteatro y el coral stone justifican su valor como locacion de eventos.",
+      "Casa de Campo coordina autorizacion para vuelo comercial dentro de la comunidad cerrada. La proximidad al aeropuerto La Romana (LRM) y a la zona de cana de Central Romana exige planificacion. Las mejores tomas del Chavon River se logran entre 7:00-8:30 a.m. cuando la niebla del rio aun se mezcla con la luz baja."
+    ],
+    en: [
+      "Casa de Campo is arguably the most iconic residential resort in the Caribbean, and its aerial composition is unique: 7,000 acres with Pete Dye's Teeth of the Dog course winding over the sea, Altos de Chavon as a 16th-century Mediterranean village replica on a cliff above the Chavon river, a marina with hundreds of vessels and active polo fields.",
+      "For villa owners, drone footage does not show a house, it shows an address within Casa de Campo. We capture proximity to the 7th green of Teeth of the Dog, view to the marina, distance to Minitas or Caleton beach, garden layout, infinity pool and relationship to neighboring villas. For Altos de Chavon, overhead views of the amphitheater and coral stone justify its value as an event venue.",
+      "Casa de Campo coordinates authorization for commercial flights inside the gated community. Proximity to La Romana airport (LRM) and the Central Romana sugar zone requires planning. The best Chavon River shots happen between 7:00-8:30 a.m. when river mist still mixes with low light."
+    ],
+    sisters: ["dron-la-romana", "dron-bayahibe", "dron-punta-cana"]
+  },
+  "dron-bayahibe": {
+    es: [
+      "Bayahibe conserva el caracter de pueblo de pescadores que ya casi no existe en el resto del este: casas de colores frente al mar, embarcaciones de madera saliendo al amanecer hacia Isla Saona y el Parque Nacional Cofresi, y una bahia natural que el dron captura en una sola toma desde 80 metros de altura. Mas al sur, Dominicus y los hoteles Iberostar y Viva Wyndham forman el otro polo turistico.",
+      "Para inmobiliaria, Bayahibe vende dos productos: la villa boutique con caracter dominicano en la bahia y el condo all-inclusive en Dominicus Beach. El dron diferencia ambos perfectamente: muestra la flota de catamaranes saliendo hacia Saona, la barrera de coral visible desde el aire, las playas tipo postcard de Dominicus y la cercania al Parque Nacional del Este.",
+      "Bayahibe esta dentro de la zona del aeropuerto La Romana (LRM) y muy cerca del Parque Nacional, donde los vuelos requieren coordinacion adicional. El agua transparente justifica programar la toma para marea baja a media manana cuando el sol entra a 45 grados y se ve el fondo coralino sin reflejos."
+    ],
+    en: [
+      "Bayahibe preserves the fishing-village character that has nearly disappeared from the rest of the east: colored houses facing the sea, wooden boats heading out at dawn toward Saona Island and Cofresi National Park, and a natural bay that drones capture in a single shot from 80 meters up. Further south, Dominicus and the Iberostar and Viva Wyndham hotels form the other tourism pole.",
+      "For real estate, Bayahibe sells two products: the boutique villa with Dominican character on the bay, and the all-inclusive condo on Dominicus Beach. Drone footage differentiates them perfectly: it shows the catamaran fleet heading to Saona, the coral barrier visible from the air, the postcard beaches of Dominicus and proximity to Parque Nacional del Este.",
+      "Bayahibe sits within the La Romana airport (LRM) zone and very close to the National Park, where flights need additional coordination. The transparent water justifies scheduling shots for low tide mid-morning when the sun enters at 45 degrees and the coral seabed is visible without glare."
+    ],
+    sisters: ["dron-la-romana", "dron-casa-de-campo", "dron-punta-cana"]
+  },
+  "dron-la-romana": {
+    es: [
+      "La Romana se entiende mejor desde el aire que desde tierra. El dron revela tres economias superpuestas: el casco urbano con la catedral Santa Rosa de Lima, el complejo Casa de Campo con su marina y campos de golf, y la inmensidad de campos de cana de azucar del Central Romana extendiendose hacia el norte con el patron geometrico de los surcos visible solo desde altura.",
+      "Para clientes corporativos documentamos operaciones del Central Romana, el puerto, terminales y el ingenio. Para inmobiliaria capturamos villas en Costa del Mar, lotes frente al rio Dulce, y el acceso desde la autopista del Coral, que conecta directo con Punta Cana en 45 minutos. La marina de Casa de Campo y los acantilados del rio Chavon son siempre tomas de referencia.",
+      "El aeropuerto Casa de Campo La Romana (LRM) impone restricciones al sur, y las operaciones del Central Romana ocupan grandes extensiones que requieren autorizacion previa. La mejor estacion va de noviembre a abril cuando la zafra de cana esta activa y los patrones agricolas son visualmente densos."
+    ],
+    en: [
+      "La Romana is better understood from above than from the ground. Drone footage reveals three overlapping economies: the urban core with the Santa Rosa de Lima cathedral, the Casa de Campo complex with its marina and golf courses, and the vast Central Romana sugar cane fields stretching north with field-row geometry only visible from altitude.",
+      "For corporate clients we document Central Romana operations, the port, terminals and the sugar mill. For real estate we capture villas in Costa del Mar, lots facing the Dulce river, and access from the Autopista del Coral, which connects directly to Punta Cana in 45 minutes. The Casa de Campo marina and Chavon river cliffs are always reference shots.",
+      "Casa de Campo La Romana airport (LRM) imposes restrictions to the south, and Central Romana operations cover large areas requiring prior authorization. The best season runs November to April when the cane harvest is active and agricultural patterns are visually dense."
+    ],
+    sisters: ["dron-casa-de-campo", "dron-bayahibe", "dron-juan-dolio"]
+  },
+  "dron-santiago": {
+    es: [
+      "Santiago es la capital del Cibao y desde el aire muestra una estructura muy distinta a Santo Domingo: una ciudad mas horizontal, anclada por el Monumento a los Heroes de la Restauracion sobre la colina mas alta, con la catedral Santiago Apostol marcando el centro y el rio Yaque del Norte rodeando el casco. El Centro Leon, simbolo cultural y arquitectonico, se aprecia mejor con tomas cenitales que destacan su volumen contemporaneo.",
+      "Para construccion e ingenieria, Santiago es uno de los mercados mas activos: torres residenciales en Los Jardines, Villa Olga y Cerros de Gurabo, naves industriales en la zona franca, y obras urbanas en avenidas Estrella Sadhala y 27 de Febrero. El dron documenta avance mensual desde el mismo angulo para comparar progreso y entregar reporte visual a inversionistas.",
+      "El aeropuerto Cibao (STI) genera restricciones al sur de la ciudad, y la cercania al Cerro Diego de Ocampo limita ciertos vuelos al oeste. La luz del Cibao es mas seca y nitida que en la costa; las tomas matutinas entre 7:00-9:00 a.m. en temporada seca (Dic-Abr) entregan colores limpios y sombras definidas."
+    ],
+    en: [
+      "Santiago is the capital of the Cibao region and from the air shows a very different structure than Santo Domingo: a more horizontal city, anchored by the Monumento a los Heroes de la Restauracion on the highest hill, with the Santiago Apostol cathedral marking the center and the Yaque del Norte river wrapping the urban core. The Centro Leon, a cultural and architectural icon, is best appreciated from overhead shots that highlight its contemporary volume.",
+      "For construction and engineering, Santiago is one of the most active markets: residential towers in Los Jardines, Villa Olga and Cerros de Gurabo, industrial warehouses in the free trade zone, and urban works on Estrella Sadhala and 27 de Febrero avenues. Drones document monthly progress from the same angle to compare advancement and deliver visual reports to investors.",
+      "Cibao airport (STI) creates restrictions south of the city, and proximity to Cerro Diego de Ocampo limits certain flights to the west. Cibao light is drier and crisper than coastal light; morning shots between 7:00-9:00 a.m. in dry season (Dec-Apr) deliver clean colors and defined shadows."
+    ],
+    sisters: ["dron-jarabacoa", "dron-puerto-plata", "dron-santo-domingo"]
+  },
+  "dron-puerto-plata": {
+    es: [
+      "Puerto Plata combina costa atlantica, montana y arquitectura colonial en una sola toma aerea: el Monte Isabel de Torres con su Cristo Redentor y la teleferica que sube 800 metros, la Fortaleza San Felipe sobre el malecon, el centro historico con casas victorianas tras la quema del 1863, y la franja hotelera de Playa Dorada hacia el este con Costambar y Cofresi al oeste.",
+      "Para turismo y hoteleria el dron narra una propuesta diferente al Caribe sur: olas mas activas, montana visible desde la playa, cultura mas establecida. Capturamos los complejos de Playa Dorada con sus campos de golf, las villas frente al mar en Cofresi, y la entrada del puerto donde atracan los cruceros en Amber Cove. El parque Ocean World y los Hoyos de Cabarete forman extension natural.",
+      "El aeropuerto Gregorio Luperon (POP) impone restricciones al este de la ciudad. La costa norte tiene mas oleaje y viento que la sur, por lo que las ventanas seguras de vuelo son mas estrechas. Entre diciembre y marzo el viento alisio es mas constante; la temporada de huracanes (Jun-Nov) afecta directamente esta costa."
+    ],
+    en: [
+      "Puerto Plata combines Atlantic coast, mountain and colonial architecture in a single aerial shot: Mount Isabel de Torres with its Christ the Redeemer statue and the cable car climbing 800 meters, Fortaleza San Felipe on the malecon, the historic downtown with Victorian houses (rebuilt after the 1863 fire), and the hotel strip of Playa Dorada to the east with Costambar and Cofresi to the west.",
+      "For tourism and hospitality, drones tell a different Caribbean story than the south: more active waves, mountain visible from the beach, more established culture. We capture the Playa Dorada complexes with their golf courses, oceanfront villas in Cofresi, and the port entrance where cruise ships dock at Amber Cove. Ocean World park and the Cabarete caves form a natural extension.",
+      "Gregorio Luperon airport (POP) creates restrictions to the east of the city. The north coast has more swell and wind than the south, so safe flight windows are narrower. Between December and March the trade winds are steadier; hurricane season (Jun-Nov) directly affects this coast."
+    ],
+    sisters: ["dron-santiago", "dron-samana", "dron-las-terrenas"]
+  },
+  "dron-samana": {
+    es: [
+      "Samana es la peninsula mas singular del Caribe dominicano: bahia profunda enmarcada por colinas verdes, Cayo Levantado flotando frente al puerto, y entre enero y marzo cientos de ballenas jorobadas (Megaptera novaeangliae) llegando a parir. El dron registra las embarcaciones de avistamiento manteniendose a distancia regulada, mientras las ballenas emergen en patrones visibles solo desde altura.",
+      "Para hoteleria y proyectos turisticos, Samana se vende como un Caribe distinto: menos densidad hotelera, mas naturaleza. Capturamos la entrada al Parque Nacional Los Haitises con sus mogotes calcareos, el Salto El Limon enterrado en selva, las playas casi vacias de Las Galeras, y la nueva infraestructura del aeropuerto El Catey (AZS) que abrio el destino al turismo internacional.",
+      "El aeropuerto Arroyo Barril en Samana ciudad y El Catey (AZS) al oeste imponen restricciones distribuidas en la peninsula. La temporada de ballenas (15 ene - 30 mar) requiere distancia minima de 300 metros laterales y altura controlada por regulacion ambiental. Para terrenos y desarrollos, la luz seca de febrero entrega el verde mas saturado y agua mas clara del ano."
+    ],
+    en: [
+      "Samana is the most singular peninsula in the Dominican Caribbean: a deep bay framed by green hills, Cayo Levantado floating in front of the port, and from January to March hundreds of humpback whales (Megaptera novaeangliae) arriving to give birth. Drones capture whale-watching boats keeping regulated distance while whales surface in patterns only visible from altitude.",
+      "For hospitality and tourism projects, Samana sells as a different Caribbean: less hotel density, more nature. We capture the entrance to Los Haitises National Park with its limestone mogotes, El Limon waterfall buried in jungle, the nearly empty beaches of Las Galeras, and the new El Catey airport (AZS) infrastructure that opened the destination to international tourism.",
+      "Arroyo Barril airport in Samana city and El Catey (AZS) to the west create distributed restrictions across the peninsula. The whale season (Jan 15 - Mar 30) requires minimum 300 m lateral distance and altitude controlled by environmental regulation. For land and developments, February's dry light delivers the most saturated greens and clearest water of the year."
+    ],
+    sisters: ["dron-las-terrenas", "dron-puerto-plata", "dron-miches"]
+  },
+  "dron-las-terrenas": {
+    es: [
+      "Las Terrenas es la cara cosmopolita de Samana: comunidad francesa-italiana establecida, playas de arena dorada en Coson y Bonita, montana selvatica como fondo inmediato, y un urbanismo mas horizontal que el de Punta Cana. El dron captura el contraste entre Playa Bonita con sus villas boutique, Playa Coson casi virgen al oeste, y el Pueblo de los Pescadores como zona gastronomica frente al mar.",
+      "Para inmobiliaria boutique, el dron es decisivo: muestra la villa, pero tambien muestra que la villa esta a 200 metros de Coson, con vista a la montana y sin construccion entre ella y el mar. Capturamos el camino entre el pueblo y El Portillo, las cataratas El Limon a 20 minutos en mula, y la nueva carretera de Samana que reduce el acceso a 2.5 horas desde Santo Domingo.",
+      "El aeropuerto El Catey (AZS) impone restricciones al oeste de Las Terrenas. La luz de la costa norte de Samana es mas suave que la de Punta Cana, lo que favorece tomas de hora dorada extendida. La temporada seca (Dic-Mar) entrega el agua verde-turquesa caracteristica del Atlantico tropical."
+    ],
+    en: [
+      "Las Terrenas is the cosmopolitan face of Samana: an established French-Italian community, golden-sand beaches at Coson and Bonita, jungle mountain as an immediate backdrop, and more horizontal urbanism than Punta Cana. Drones capture the contrast between Playa Bonita with its boutique villas, near-virgin Playa Coson to the west, and the Pueblo de los Pescadores as the gastronomic strip facing the sea.",
+      "For boutique real estate, drones are decisive: they show the villa, but also prove the villa sits 200 meters from Coson, with mountain views and no construction between it and the sea. We capture the road between town and El Portillo, El Limon waterfalls 20 minutes on mule, and the new Samana highway that reduces access to 2.5 hours from Santo Domingo.",
+      "El Catey airport (AZS) creates restrictions west of Las Terrenas. North coast Samana light is softer than Punta Cana's, favoring extended golden-hour shots. The dry season (Dec-Mar) delivers the signature green-turquoise water of the tropical Atlantic."
+    ],
+    sisters: ["dron-samana", "dron-puerto-plata", "dron-miches"]
+  },
+  "dron-jarabacoa": {
+    es: [
+      "Jarabacoa cambia por completo la paleta del dron dominicano: pinos en lugar de palmeras, rios de montana en lugar de mar, neblina matinal y altitud de 530 metros. La toma aerea revela la confluencia de los rios Yaque del Norte y Jimenoa, los saltos de Jimenoa Uno y Dos hundidos en canyon, las terrazas agricolas de fresa y vegetales, y la silueta del Pico Duarte como remate a 3,098 metros en dias claros.",
+      "Para ecoturismo y fincas, el dron documenta cabanas en Jamaca de Dios, fincas en Manabao, monasterios y retiros en La Confluencia, y operaciones de rafting sobre el Yaque del Norte. Para inmobiliaria de montana, la fotografia aerea es la unica forma de explicar la pendiente del terreno, la orientacion al pico Duarte y la distancia a los saltos.",
+      "Jarabacoa tiene clima mas variable que la costa: niebla densa hasta las 9 a.m., posibilidad de lluvia vespertina y vientos cambiantes en valles. La ventana ideal es 9:00-11:00 a.m. cuando la niebla se levanta del rio. La temporada seca (Dic-Abr) entrega cielos azules profundos que destacan el verde de los pinos."
+    ],
+    en: [
+      "Jarabacoa completely changes the Dominican drone palette: pines instead of palms, mountain rivers instead of sea, morning mist and 530 meters elevation. Aerial footage reveals the confluence of the Yaque del Norte and Jimenoa rivers, Jimenoa Uno and Dos waterfalls sunk into canyon, agricultural terraces of strawberry and vegetables, and the Pico Duarte silhouette at 3,098 meters on clear days.",
+      "For ecotourism and farms, drones document cabins in Jamaca de Dios, farms in Manabao, monasteries and retreats in La Confluencia, and rafting operations on the Yaque del Norte. For mountain real estate, aerial photography is the only way to explain land slope, orientation to Pico Duarte and distance to the waterfalls.",
+      "Jarabacoa has more variable weather than the coast: dense fog until 9 a.m., afternoon rain risk, and shifting valley winds. The ideal window is 9:00-11:00 a.m. when mist lifts from the river. The dry season (Dec-Apr) delivers deep blue skies that highlight the pine green."
+    ],
+    sisters: ["dron-santiago", "dron-puerto-plata", "dron-samana"]
+  },
+  "dron-juan-dolio": {
+    es: [
+      "Juan Dolio se ha convertido en un corredor de inversion residencial inmediato a Santo Domingo: 50 minutos por la autopista de las Americas y se llega a torres frente al mar como Costa Atlantica, Costa Hermosa y Marbella, condos turisticos en Guayacanes, y el campo de golf del Metro Country Club. Desde el aire se aprecia la franja continua de coral apenas separada de la costa.",
+      "Para inmobiliaria, Juan Dolio es ideal para venta a inversionistas dominicanos que quieren rentar a turistas o tener una segunda residencia con acceso facil desde la capital. El dron muestra la diferencia entre Villas del Mar con su arena mas dorada, Guayacanes mas exclusivo, y el lado de Embassy Suites con su densidad mayor. Captura la cercania al malecon, al supermercado y a los restaurantes de playa.",
+      "Juan Dolio comparte la zona del aeropuerto Las Americas (SDQ) al oeste y La Romana (LRM) al este. El oleaje es mas calmo que en Punta Cana porque la barrera de coral rompe las olas grandes. Las mejores tomas se logran con marea alta a media manana cuando el agua cubre el coral mas cercano a la orilla."
+    ],
+    en: [
+      "Juan Dolio has become a residential investment corridor immediately accessible from Santo Domingo: 50 minutes by the Las Americas highway reaches oceanfront towers like Costa Atlantica, Costa Hermosa and Marbella, vacation condos in Guayacanes, and the Metro Country Club golf course. From the air, the continuous coral strip just off the coast is visible.",
+      "For real estate, Juan Dolio is ideal for selling to Dominican investors wanting to rent to tourists or maintain a second residence with easy access from the capital. Drones show the difference between Villas del Mar with its more golden sand, the more exclusive Guayacanes, and the Embassy Suites side with greater density. They capture proximity to the malecon, supermarket and beach restaurants.",
+      "Juan Dolio shares the Las Americas airport (SDQ) zone to the west and La Romana (LRM) to the east. Waves are calmer than in Punta Cana because the coral barrier breaks the larger swell. The best shots come at high tide mid-morning when water covers the shore-side coral."
+    ],
+    sisters: ["dron-santo-domingo", "dron-la-romana", "dron-bayahibe"]
+  },
+  "dron-miches": {
+    es: [
+      "Miches es la frontera turistica emergente del este: hasta 2020 era un pueblo de pescadores con la mejor arena blanca del pais y casi sin infraestructura. Hoy el dron documenta el cambio acelerado: Tropicalia y Four Seasons en construccion, Club Med Michelin abierto en 2024, Costa Esmeralda extendiendose como nueva franja hotelera, y la laguna Limon como reserva natural protegida.",
+      "Para inversionistas y desarrolladores, Miches es el caso de uso mas claro de fotografia aerea: terrenos que cambian de valor cada trimestre, vistas hacia el cabo Engano y la sierra de Yamasa, y la unica zona del este donde aun se ve playa virgen sin un solo hotel detras. Capturamos la conexion con la autopista nueva que reduce el acceso desde Santo Domingo a 2 horas.",
+      "Miches no tiene aeropuerto propio cercano (PUJ esta a 1 hora), por lo que las restricciones son menores; sin embargo los proyectos en construccion exigen coordinacion con los desarrolladores. La temporada Dic-Abr es la unica donde el viento del este se calma lo suficiente para vuelo estable sobre el oceano."
+    ],
+    en: [
+      "Miches is the emerging tourism frontier of the east: until 2020 it was a fishing town with the country's whitest sand and almost no infrastructure. Today drones document accelerated change: Tropicalia and Four Seasons under construction, Club Med Michelin opened in 2024, Costa Esmeralda extending as a new hotel strip, and Laguna Limon as a protected natural reserve.",
+      "For investors and developers, Miches is the clearest use case for aerial photography: lots that change value each quarter, views toward Cabo Engano and the Yamasa range, and the only eastern zone where virgin beach with no hotel behind it can still be seen. We capture the connection to the new highway that reduces access from Santo Domingo to 2 hours.",
+      "Miches has no nearby airport (PUJ is 1 hour away), so restrictions are lower; however active construction projects require coordination with developers. The Dec-Apr season is the only window when the east wind calms enough for stable flight over the ocean."
+    ],
+    sisters: ["dron-punta-cana", "dron-bavaro", "dron-samana"]
+  }
+};
+
 export const cityPages: DronePage[] = [
   city("santo-domingo", "santo-domingo", "Santo Domingo", "Distrito Nacional", "Las torres, avenidas, hoteles, zonas comerciales y proyectos verticales necesitan angulos consistentes para explicar altura, vista, fachada y relacion con el entorno urbano.", "Towers, avenues, hotels, commercial zones and vertical developments need consistent angles to explain height, view, facade and urban context.", ["Piantini", "Naco", "Bella Vista", "Zona Colonial", "Evaristo Morales"], "/images/drone/fotografia-dron-santo-domingo.webp"),
   city("punta-cana", "punta-cana", "Punta Cana", "La Altagracia", "Las villas, resorts, playas y proyectos para inversionistas requieren tomas que vendan lifestyle, acceso, piscina, playa y distancia visual a amenidades.", "Villas, resorts, beaches and investor projects require shots that sell lifestyle, access, pool, beach and visual distance to amenities.", ["Bavaro", "Cap Cana", "Cocotal", "Uvero Alto", "Los Corales"], "/images/drone/drone-inmobiliario-republica-dominicana.webp"),
@@ -300,7 +488,15 @@ export const cityPages: DronePage[] = [
   city("bavaro", "bavaro", "Bavaro", "La Altagracia", "Airbnb, condominios, resorts y villas compiten por atencion; el dron permite mostrar playa, piscina, acceso y contexto turistico.", "Airbnbs, condos, resorts and villas compete for attention; drone shows beach, pool, access and tourism context.", ["Los Corales", "Cortecito", "Cocotal", "Arena Gorda"], "/images/drone/drone-inmobiliario-republica-dominicana.webp"),
   city("miches", "miches", "Miches", "El Seibo", "Como zona emergente de resorts e inversion, Miches necesita documentacion aerea para terrenos, playas, acceso y escala de desarrollo.", "As an emerging resort and investment zone, Miches needs aerial documentation for land, beaches, access and development scale.", ["Costa Esmeralda", "Playa Arriba", "Laguna Limon"]),
   city("bayahibe", "bayahibe", "Bayahibe", "La Altagracia", "Hoteles, villas, tours y propiedades turisticas usan drone para comunicar agua, playa, acceso, entorno y valor vacacional.", "Hotels, villas, tours and tourism properties use drone to communicate water, beach, access, setting and vacation value.", ["Dominicus", "Bayahibe Centro", "Parque del Este"])
-];
+].map((page) => {
+  const ctx = cityLocalContext[page.slug];
+  const sisters = ctx?.sisters;
+  return {
+    ...page,
+    ...(ctx ? { localContext: ctx.es, enLocalContext: ctx.en } : {}),
+    ...(sisters ? { sisterCities: sisters } : {})
+  };
+});
 
 export const guidePages: DronePage[] = [
   {

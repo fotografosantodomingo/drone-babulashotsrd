@@ -160,6 +160,12 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
   const related = selectedPage.related.map((slug) => findPage(slug)).filter(Boolean) as DronePageData[];
   const cityLinks = allPages.filter((item) => item.type === "city").slice(0, 14);
   const serviceLinks = allPages.filter((item) => item.type === "service" || item.type === "pricing");
+  const localContextParagraphs = isEnglish
+    ? selectedPage.enLocalContext ?? []
+    : selectedPage.localContext ?? [];
+  const sisterCityPages = (selectedPage.sisterCities ?? [])
+    .map((slug) => findPage(slug))
+    .filter((p): p is DronePageData => Boolean(p));
 
   return (
     <main>
@@ -297,6 +303,57 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
           </div>
         </div>
       </section>
+
+      {localContextParagraphs.length ? (
+        <section className="section">
+          <div className="wrap split">
+            <p className="section-tag">{t(locale, "Contexto local", "Local context")}</p>
+            <div>
+              <h2>
+                {t(
+                  locale,
+                  `Que vuela un dron en ${selectedPage.area ?? selectedPage.h1}`,
+                  `What a drone actually captures in ${selectedPage.area ?? selectedPage.enH1}`
+                )}
+              </h2>
+              {localContextParagraphs.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {sisterCityPages.length ? (
+        <section className="section alt-section">
+          <div className="wrap">
+            <div className="section-heading">
+              <p className="section-tag">{t(locale, "Ciudades hermanas", "Sister cities")}</p>
+              <h2>
+                {t(
+                  locale,
+                  `Ciudades cercanas con cobertura de dron`,
+                  `Nearby cities with drone coverage`
+                )}
+              </h2>
+              <p>
+                {t(
+                  locale,
+                  "Si tu proyecto cruza varias ubicaciones del corredor, agrupamos vuelos para reducir traslado y entregar material consistente.",
+                  "If your project crosses several locations in the corridor, we group flights to reduce travel and deliver consistent media."
+                )}
+              </p>
+            </div>
+            <div className="related-links">
+              {sisterCityPages.map((item) => (
+                <Link href={pathFor(item, locale)} key={item.slug}>
+                  {t(locale, item.h1, item.enH1)}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section">
         <div className="wrap split">
