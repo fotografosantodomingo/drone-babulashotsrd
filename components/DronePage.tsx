@@ -3,7 +3,8 @@ import Link from "next/link";
 import { CrossSiteCta } from "@/components/CrossSiteCta";
 import { HeroImage } from "@/components/HeroImage";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { allPages, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
+import { allPages, bodaUrl, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, santoDomingoHubUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
+import { aggregateRating, geoCoordinates, organizationSchema, postalAddress } from "@/lib/seo";
 
 function t(locale: Locale, es: string, en: string) {
   return locale === "en" ? en : es;
@@ -80,25 +81,54 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
     name: t(locale, item.q, item.enQ),
     acceptedAnswer: { "@type": "Answer", text: t(locale, item.a, item.enA) }
   }));
+  // Numeric priceRange computed from published packages (RD$11,900 – RD$35,700).
+  // See memory/schema_standards.md rule 5.
+  const numericOfferPrices = dronePackages
+    .map((p) => p.numericPrice)
+    .filter((n): n is number => typeof n === "number");
+  const priceRange = numericOfferPrices.length
+    ? `RD$${Math.min(...numericOfferPrices).toLocaleString("en-US")}-RD$${Math.max(...numericOfferPrices).toLocaleString("en-US")}`
+    : "RD$11,900-RD$35,700";
+
+  const heroImageUrl = `${siteUrl}${selectedPage.image}`;
+
+  // Brand entity — LocalBusiness (NOT Photographer / NOT array of types) so
+  // Review Snippet validator accepts the aggregateRating. See schema_standards
+  // memory rules 2a + 2c.
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${siteUrl}#localbusiness`,
+    name: "Babula Shots Drone",
+    url: siteUrl,
+    image: heroImageUrl,
+    telephone: phoneE164.startsWith("+") ? phoneE164 : `+${phoneE164}`,
+    priceRange,
+    address: postalAddress,
+    geo: geoCoordinates,
+    areaServed: [
+      { "@type": "City", name: "Santo Domingo" },
+      { "@type": "City", name: "Punta Cana" },
+      { "@type": "City", name: "La Romana" },
+      { "@type": "City", name: "Las Terrenas" },
+      { "@type": "Country", name: "Dominican Republic" }
+    ],
+    aggregateRating,
+    sameAs: [mainBrandUrl, bodaUrl, inmobiliariaUrl, santoDomingoHubUrl, "https://www.instagram.com/babulashotsrd/"]
+  };
+
   const schema = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Babula Shots Drone",
-      url: siteUrl,
-      logo: `${siteUrl}/images/cropped-babulashotslogo-1.png`,
-      telephone: "+18097209547",
-      parentOrganization: { "@type": "Organization", name: "Babula Shots RD", url: mainBrandUrl },
-      sameAs: [mainBrandUrl, inmobiliariaUrl, "https://www.instagram.com/babulashotsrd/"]
-    },
+    organizationSchema,
+    localBusinessSchema,
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: title,
       url: pageUrl,
-      telephone: "+18097209547",
-      priceRange: "$$",
+      telephone: phoneE164.startsWith("+") ? phoneE164 : `+${phoneE164}`,
+      priceRange,
       areaServed: home ? { "@type": "Country", name: "Dominican Republic" } : citySchema(selectedPage),
+      provider: { "@type": "Organization", name: "Babula Shots Drone", "@id": `${siteUrl}#organization` },
       knowsAbout: ["Drone photography", "Aerial video", "Real estate drone", "Construction progress", "Drone inspections", "Photogrammetry"],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -118,6 +148,8 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
       name: title,
       url: pageUrl,
       inLanguage: isEnglish ? "en" : "es-DO",
+      image: heroImageUrl,
+      publisher: { "@type": "Organization", name: "Babula Shots Drone", "@id": `${siteUrl}#organization` },
       breadcrumb: {
         "@type": "BreadcrumbList",
         itemListElement: buildBreadcrumb(isEnglish, home, selectedPage, title, pageUrl)
