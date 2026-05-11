@@ -1,3 +1,4 @@
+import { articles } from "@/lib/articles";
 import { allPages, pathFor } from "@/lib/droneData";
 
 type LanguagePaths = { es: string; en: string };
@@ -14,7 +15,13 @@ const routePairs: LanguagePaths[] = [
   { es: "/ubicaciones/", en: "/en/locations/" },
   { es: "/precios/", en: "/en/prices/" },
   { es: "/faq/", en: "/en/faq/" },
-  ...allPages.map((page) => ({ es: pathFor(page, "es"), en: pathFor(page, "en") }))
+  { es: "/blog/", en: "/en/blog/" },
+  ...allPages.map((page) => ({ es: pathFor(page, "es"), en: pathFor(page, "en") })),
+  // Bilingual articles at /blog/ + /en/blog/ — auto-derived from articles.ts.
+  // Adding a new article with an `en` field automatically wires up the language toggle.
+  ...articles
+    .filter((a) => a.en?.enSlug)
+    .map((a) => ({ es: `/blog/${a.slug}/`, en: `/en/blog/${a.en!.enSlug}/` }))
 ].map((pair) => ({ es: normalizePath(pair.es), en: normalizePath(pair.en) }));
 
 export function languagePathsFor(pathname: string): LanguagePaths {

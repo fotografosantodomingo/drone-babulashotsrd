@@ -7,6 +7,7 @@ const navItems: Array<{ label: string; href: string; external?: boolean }> = [
   { label: "Servicios", href: "/servicios/" },
   { label: "Ubicaciones", href: "/ubicaciones/" },
   { label: "Precios", href: "/precios/" },
+  { label: "Blog", href: "/blog/" },
   { label: "FAQ", href: "/faq/" },
   { label: "Contacto", href: "#contacto" }
 ];
