@@ -261,6 +261,10 @@ export const servicePages: DronePage[] = [
   }
 ];
 
+// `image` defaults to the generic Santo Domingo aerial. When real per-city
+// aerials arrive, pass an explicit image string at the city() call site so
+// each city renders its own hero. DO NOT change this default — multiple
+// cities depend on it as a placeholder until their dedicated photo lands.
 const city = (slug: string, enSlug: string, name: string, province: string, angle: string, enAngle: string, zones: string[], image = "/images/drone/fotografia-dron-santo-domingo.webp"): DronePage => ({
   slug: `dron-${slug}`,
   enSlug: `drone-${enSlug}`,
