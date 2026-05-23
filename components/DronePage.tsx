@@ -122,6 +122,15 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
     localBusinessSchema,
     {
       "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: "Babula Shots Drone",
+      inLanguage: isEnglish ? "en" : "es-DO",
+      publisher: { "@id": `${siteUrl}#organization` }
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: title,
       url: pageUrl,
