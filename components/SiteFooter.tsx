@@ -39,7 +39,9 @@ const alsoAtLinks: Array<{ label: string; href: string; primary: string; descrip
 ];
 
 export function SiteFooter() {
-  const cities = allPages.filter((page) => page.type === "city").slice(0, 12);
+  // Show all city pages (was sliced to 12, which dropped Miches + Bayahibe
+  // from the site-wide footer link — they were only reachable via /ubicaciones/).
+  const cities = allPages.filter((page) => page.type === "city");
 
   return (
     <footer className="site-footer">
