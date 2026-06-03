@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     images: ["/images/drone/social-card-1200x630.webp"]
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  verification: { google: "O1tSOujyggdY8fJKs7scDwU6Gwfs_aEH9YSWLMHg1kw" },
   icons: { icon: "/images/cropped-babulashotslogo-1.png", apple: "/images/cropped-babulashotslogo-1.png" }
 };
 
