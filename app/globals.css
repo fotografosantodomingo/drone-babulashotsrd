@@ -408,6 +408,12 @@ p { line-height: 1.65; }
 .section { padding: clamp(54px, 8vw, 96px) 0; }
 .alt-section { background: var(--surface-2); }
 .wrap { width: min(1160px, calc(100% - (clamp(20px, 4vw, 64px) * 2))); margin-inline: auto; }
+/* Blog article: constrain to a readable measure (was full-width / lines too long) */
+.article {
+  width: min(820px, calc(100% - (clamp(20px, 4vw, 64px) * 2)));
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 5rem);
+}
 .split {
   display: grid;
   grid-template-columns: minmax(160px, 280px) 1fr;
