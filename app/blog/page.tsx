@@ -74,7 +74,7 @@ export default function BlogIndex() {
           <div className="card-grid">
             {articles.map((a) => (
               <Link key={a.slug} className="card" href={`/blog/${a.slug}/`}>
-                <img src={a.hero.src} alt={a.hero.alt} loading="lazy" decoding="async" />
+                <img src={a.hero.src} alt={a.hero.alt} width={a.hero.width} height={a.hero.height} loading="lazy" decoding="async" />
                 <span>{a.eyebrow}</span>
                 <h3>{a.h1}</h3>
                 <p>{a.metaDescription}</p>

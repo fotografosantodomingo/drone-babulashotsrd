@@ -1,8 +1,10 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ThemeLanguageControls } from "@/components/ThemeLanguageControls";
 import { niche } from "@/lib/droneData";
 
-const navItems: Array<{ label: string; href: string; external?: boolean }> = [
+const navItemsEs: Array<{ label: string; href: string; external?: boolean }> = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/servicios/" },
   { label: "Ubicaciones", href: "/ubicaciones/" },
@@ -12,19 +14,32 @@ const navItems: Array<{ label: string; href: string; external?: boolean }> = [
   { label: "Contacto", href: "#contacto" }
 ];
 
+const navItemsEn: Array<{ label: string; href: string; external?: boolean }> = [
+  { label: "Home", href: "/en/" },
+  { label: "Services", href: "/en/services/" },
+  { label: "Locations", href: "/en/locations/" },
+  { label: "Prices", href: "/en/prices/" },
+  { label: "Blog", href: "/en/blog/" },
+  { label: "FAQ", href: "/en/faq/" },
+  { label: "Contact", href: "#contacto" }
+];
+
 export function SiteHeader() {
+  const pathname = usePathname() || "/";
+  const isEn = pathname.startsWith("/en");
+  const navItems = isEn ? navItemsEn : navItemsEs;
   return (
     <header className="site-header" data-drawer-host>
       <div className="header-row">
         <ThemeLanguageControls />
-        <Link className="brand" href="/" aria-label={`Babula Shots ${niche.label}`}>
+        <Link className="brand" href={isEn ? "/en/" : "/"} aria-label={`Babula Shots ${niche.label}`}>
           <span className="brand-niche">{niche.label}</span>
           <span className="brand-tag">By Babula Shots</span>
         </Link>
         <button
           type="button"
           className="hamburger"
-          aria-label="Abrir menu"
+          aria-label={isEn ? "Open menu" : "Abrir menu"}
           aria-controls="site-drawer"
           aria-expanded="false"
           data-drawer-toggle
@@ -54,7 +69,7 @@ export function SiteHeader() {
               <span className="brand-niche">{niche.label}</span>
               <span className="brand-tag">By Babula Shots</span>
             </span>
-            <button type="button" className="drawer-close" aria-label="Cerrar menu" data-drawer-close>
+            <button type="button" className="drawer-close" aria-label={isEn ? "Close menu" : "Cerrar menu"} data-drawer-close>
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
