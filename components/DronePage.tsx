@@ -415,7 +415,7 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
 
       <CrossSiteCta locale={locale} />
 
-      <section className="conversion-panel" id="contacto">
+      <section className="conversion-panel" id="contacto-cta">
         <div>
           <p className="section-tag">{t(locale, "Cotizacion", "Quote")}</p>
           <h2>{t(locale, "Cotiza tu vuelo con dron", "Quote your drone flight")}</h2>
