@@ -3,8 +3,8 @@ import Link from "next/link";
 import { CrossSiteCta } from "@/components/CrossSiteCta";
 import { HeroImage } from "@/components/HeroImage";
 import { SeoJsonLd } from "@/components/SeoJsonLd";
-import { allPages, bodaUrl, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, santoDomingoHubUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
-import { aggregateRating, geoCoordinates, organizationSchema, postalAddress } from "@/lib/seo";
+import { allPages, bookingUrl, canonicalUrl, dronePackages, findPage, inmobiliariaUrl, Locale, mainBrandUrl, pathFor, phone, phoneE164, pricingSourceUrl, siteUrl, type DronePage as DronePageData, whatsappUrl } from "@/lib/droneData";
+import { aggregateRating, geoCoordinates, organizationSchema, personSchema, postalAddress, SAME_AS_LINKS } from "@/lib/seo";
 
 function t(locale: Locale, es: string, en: string) {
   return locale === "en" ? en : es;
@@ -114,11 +114,12 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
       { "@type": "Country", name: "Dominican Republic" }
     ],
     aggregateRating,
-    sameAs: [mainBrandUrl, bodaUrl, inmobiliariaUrl, santoDomingoHubUrl, "https://www.instagram.com/babulashotsrd/"]
+    sameAs: SAME_AS_LINKS
   };
 
   const schema = [
     organizationSchema,
+    personSchema,
     localBusinessSchema,
     {
       "@context": "https://schema.org",
@@ -137,7 +138,7 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
       telephone: phoneE164.startsWith("+") ? phoneE164 : `+${phoneE164}`,
       priceRange,
       areaServed: home ? { "@type": "Country", name: "Dominican Republic" } : citySchema(selectedPage),
-      provider: { "@type": "Organization", name: "Babula Shots Drone", "@id": `${siteUrl}#organization` },
+      provider: { "@id": `${siteUrl}#organization` },
       knowsAbout: ["Drone photography", "Aerial video", "Real estate drone", "Construction progress", "Drone inspections", "Photogrammetry"],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -158,13 +159,31 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
       url: pageUrl,
       inLanguage: isEnglish ? "en" : "es-DO",
       image: heroImageUrl,
-      publisher: { "@type": "Organization", name: "Babula Shots Drone", "@id": `${siteUrl}#organization` },
+      publisher: { "@id": `${siteUrl}#organization` },
       breadcrumb: {
         "@type": "BreadcrumbList",
         itemListElement: buildBreadcrumb(isEnglish, home, selectedPage, title, pageUrl)
       }
     },
-    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq }
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq },
+    ...(home
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: t(
+              locale,
+              "Fotografía Aérea e Inmobiliaria con Dron en República Dominicana | Babula Shots",
+              "Aerial and Real Estate Photography with Drone in the Dominican Republic | Babula Shots"
+            ),
+            description: intro,
+            thumbnailUrl: "https://i.ytimg.com/vi/3AYlaFwE574/hqdefault.jpg",
+            uploadDate: "2026-09-01T06:10:19-07:00",
+            embedUrl: "https://www.youtube.com/embed/3AYlaFwE574",
+            publisher: { "@id": `${siteUrl}#organization` }
+          }
+        ]
+      : [])
   ];
   const related = selectedPage.related.map((slug) => findPage(slug)).filter(Boolean) as DronePageData[];
   const cityLinks = allPages.filter((item) => item.type === "city").slice(0, 14);
@@ -187,6 +206,50 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
           <p>{intro}</p>
         </div>
       </section>
+
+      {home && (
+        <section className="section">
+          <div className="wrap">
+            <div className="section-heading">
+              <p className="section-tag">{t(locale, "Video", "Video")}</p>
+              <h2>
+                {t(
+                  locale,
+                  "Así se ve nuestro trabajo con foto y video de drone",
+                  "This is what our drone photo and video work looks like"
+                )}
+              </h2>
+            </div>
+            <div className="video-showcase-grid">
+              <div className="video-embed">
+                <iframe
+                  src="https://www.youtube.com/embed/3AYlaFwE574"
+                  title={t(
+                    locale,
+                    "Fotografía Aérea e Inmobiliaria con Dron en República Dominicana | Babula Shots",
+                    "Aerial and Real Estate Photography with Drone in the Dominican Republic | Babula Shots"
+                  )}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                />
+              </div>
+              <figure className="video-showcase-photo">
+                <img
+                  src="https://res.cloudinary.com/dwewurxla/image/upload/f_auto,q_auto/v1788268999/Servicio_Drone_Para_Bienes_Raiices_Republica_dominicana_Babula_1_ptjjm1.webp"
+                  alt={t(
+                    locale,
+                    "Foto aérea con drone de una villa con piscina en República Dominicana",
+                    "Aerial drone photo of a villa with a pool in the Dominican Republic"
+                  )}
+                  loading="lazy"
+                />
+                <figcaption>{t(locale, "Ejemplo real de una sesión con drone", "Example still from a real drone session")}</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="wrap split">
