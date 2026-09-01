@@ -90,6 +90,31 @@ export const localBusinessAreaServed = [
 // Per schema_standards.md rule 5: prefer concrete numeric ranges over "$$".
 export const localBusinessPriceRange = "RD$9,540-RD$35,800";
 
+// Canonical Person node — the network founder. Referenced by @id from
+// organizationSchema.founder (and anywhere else a Person node is needed)
+// instead of being re-declared inline, so there's exactly one #person node
+// sitewide.
+export const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${droneUrl}#person`,
+  name: "Michal Nikodem Babula",
+  sameAs: "https://www.wikidata.org/wiki/Q139892966"
+};
+
+// Full, canonical list of the Organization's sameAs links (network sites +
+// social + Wikidata). Reuse this everywhere an Organization/LocalBusiness
+// node needs sameAs instead of hand-rolling a shorter/partial array.
+export const SAME_AS_LINKS = [
+  mainBrandUrl,
+  bodaUrl,
+  inmobiliariaUrl,
+  droneUrl,
+  santoDomingoHubUrl,
+  "https://www.instagram.com/babulashotsrd/",
+  "https://www.wikidata.org/wiki/Q139892828"
+];
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -103,14 +128,10 @@ export const organizationSchema = {
   image: brandLogoUrl,
   logo: brandLogoUrl,
   address: postalAddress,
-  founder: {
-    "@type": "Person",
-    name: "Michal Nikodem Babula",
-    sameAs: "https://www.wikidata.org/wiki/Q139892966"
-  },
+  founder: { "@id": `${droneUrl}#person` },
   // NOTE: NOT using `parentOrganization` — GSC counts the parent's name as a
   // duplicate of the outer name. Brand hierarchy is conveyed by sameAs below.
-  sameAs: [mainBrandUrl, bodaUrl, inmobiliariaUrl, droneUrl, santoDomingoHubUrl, "https://www.instagram.com/babulashotsrd/", "https://www.wikidata.org/wiki/Q139892828"]
+  sameAs: SAME_AS_LINKS
 };
 
 export function breadcrumbSchema(items: Array<{ name: string; path?: string; item?: string }>) {
