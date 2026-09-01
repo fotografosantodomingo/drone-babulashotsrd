@@ -244,7 +244,7 @@ export function DroneLandingPage({ page, locale = "es", home = false }: { page?:
                   )}
                   loading="lazy"
                 />
-                <figcaption>{t(locale, "Ejemplo real de una sesión con drone", "Example still from a real drone session")}</figcaption>
+                <figcaption>{t(locale, "Toma aérea real, capturada en una de nuestras sesiones con drone", "Real aerial still, captured during one of our drone sessions")}</figcaption>
               </figure>
             </div>
           </div>

@@ -465,11 +465,6 @@ p { line-height: 1.65; }
   font-size: 0.85rem;
   color: var(--muted);
 }
-@media (min-width: 900px) {
-  .video-showcase-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 .two-cols, .card-grid, .gallery-grid {
   display: grid;
